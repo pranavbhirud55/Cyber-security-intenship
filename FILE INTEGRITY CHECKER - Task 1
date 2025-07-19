@@ -1,0 +1,20 @@
+import hashlib
+
+def get_file_hash(filepath):
+    hash_md5 = hashlib.md5()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
+# Usage
+file1 = "file1.txt"
+file2 = "file2.txt"
+
+hash1 = get_file_hash(file1)
+hash2 = get_file_hash(file2)
+
+print(f"Hash1: {hash1}")
+print(f"Hash2: {hash2}")
+print("Files Match!" if hash1 == hash2 else "Files DO NOT Match!")
+
